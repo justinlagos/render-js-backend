@@ -25,7 +25,7 @@ app.post("/", async (req, res) => {
       return res.status(400).json({ error: "Invalid request payload" });
     }
 
-    const prompt = \`Generate 7 unique, premium-quality social media content examples for Syntech Biofuel about: \${topics.join(", ")}.
+    const prompt = `Generate 7 unique, premium-quality social media content examples for Syntech Biofuel about: ${topics.join(", ")}.
 Each post should have:
 - Headline
 - Subheadline
@@ -34,7 +34,7 @@ Return as JSON like:
 [
   { "headline": "...", "subheadline": "...", "isFunny": true },
   ...
-]\`;
+]`;
 
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
