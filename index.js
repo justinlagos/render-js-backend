@@ -35,19 +35,20 @@ Return as JSON like:
   ...
 ]`;
 
-  try {
-    const chat = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.8,
-    });
+ try {
+  const chat = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: prompt }],
+    temperature: 0.8,
+  });
 
-    const json = JSON.parse(chat.choices[0].message.content || "[]");
-    res.json({ result: json });
-  } catch (err) {
-    console.error("OpenAI Error:", err);
-    res.status(500).json({ error: "OpenAI failed", details: err.message });
-  }
+  const json = JSON.parse(chat.choices[0].message.content || "[]");
+  res.json({ result: json }); // <- fix is here
+} catch (err) {
+  console.error("OpenAI Error:", err);
+  res.status(500).json({ error: "OpenAI failed", details: err.message });
+}
+
 });
 
 // Start server
